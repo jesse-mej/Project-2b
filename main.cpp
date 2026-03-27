@@ -9,7 +9,8 @@
 using namespace std;
 
 int main() {
-    void printMainMenu();
+    void printMainMenu(); // prints main menu
+    sortingCategories printSortingCategories(); // prints sorting category options
 }
 
 void printMainMenu() {
@@ -22,4 +23,16 @@ void printMainMenu() {
     cout << "[4] View Top Ten Records\n";
     cout << "[5] Exit\n";
     cout << "Enter Choice: ";
+}
+
+sortingCategories printSortingCategories() {
+    int choice;
+    cout << "\nChoose Sort Category:\n";
+    cout << "[1] Emission Type\n";
+    cout << "[2] Year\n";
+    cout << "[3] Country\n";
+    cout << "[4] Sector\n";
+    cout << "Enter Choice: ";
+    cin >> choice;
+    return static_cast<sortingCategories>(choice);
 }

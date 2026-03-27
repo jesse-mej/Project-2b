@@ -8,11 +8,24 @@
 #include "load_csv.h"
 using namespace std;
 
+void printMainMenu(); // prints main menu
+sortingCategories printSortingCategories(); // prints sorting category options
+emissionType printEmissionTypes(); // prints emission types
+sectorType printSectorTypes(); // prints out all the different sectors
+
 int main() {
-    void printMainMenu(); // prints main menu
-    sortingCategories printSortingCategories(); // prints sorting category options
-    emissionType printEmissionTypes(); // prints emission types
-    sectorType printSectorTypes(); // prints out all the different sectors
+    vector<Record> data; // stores the dataset
+    string filename = "../emissions.csv";
+
+    if (!loadCSV(filename, data)) { // check if dataset properly loaded
+        cout << "Error loading dataset.\n";
+        return 1;
+    }
+    cout << "Dataset loaded successfully\n";
+    cout << "Records: " << data.size() << "\n";
+
+    int choice;
+
 }
 
 void printMainMenu() {
@@ -57,7 +70,7 @@ sectorType printSectorTypes() {
     cout << "[2] Buildings\n";
     cout << "[3] Transport\n";
     cout << "[4] Other Industry\n";
-    cout << "[5] Other Sectors\n";
+    cout << "[5] Other Sector\n";
     cout << "Enter Choice: ";
     cin >> choice;
     return static_cast<sectorType>(choice);

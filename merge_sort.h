@@ -12,6 +12,6 @@ using namespace std;
 
 void mergeSort(vector<Record>& emissionData, int left, int right, string category); // main function
 double categoryValue(const Record& record, const string& category); // helper for grabbing different values for different categories
-
+void mergeAndPrint(vector<Record>& emissionData, string category); // helper function for printing final sorted results
 
 #endif //PROJECT_2B_MERGE_SORT_H

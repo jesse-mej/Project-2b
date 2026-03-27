@@ -3,6 +3,9 @@
 //
 #include "merge_sort.h"
 
+#include <iostream>
+
+// helper function used for efficiently grabbing each value that needs to be sorted within mergeSort
 double categoryValue(const Record& record, const string& category) {
     if (category == "year") {
         return record.year;
@@ -33,7 +36,7 @@ double categoryValue(const Record& record, const string& category) {
     }
 
     return 0;
-} // helper function used for efficiently grabbing each value that needs to be sorted within mergeSort
+}
 
 void mergeSort(vector<Record>& emissionData, int left, int right, string category) {
     if (left >= right) { // this means that this section would only have 1 thing or less, so we can stop
@@ -110,6 +113,21 @@ void mergeSort(vector<Record>& emissionData, int left, int right, string categor
             emissionData[mergedIndex] = rightSide[rightIndex];
             rightIndex++;
             mergedIndex++;
+        }
+    }
+}
+
+// helper function that prints out, in order, all of the necessary data i.e. country, year, category in order
+void mergeAndPrint(vector<Record>& emissionData, string category) {
+    mergeSort(emissionData, 0, emissionData.size(), category);
+    cout << i + 1 << ". "; // print out ranking
+    for (int i = 0; i < emissionData.size() - 1; i++) {
+        if (category == "country") {
+            cout << emissionData[i].country << " - " << emissionData[i].year << endl;
+        }
+        else {
+            // print out country - year - category value for these rankings
+            cout << emissionData[i].country << " - " << emissionData[i].year << " - " << categoryValue(emissionData[i], category) << endl;
         }
     }
 }

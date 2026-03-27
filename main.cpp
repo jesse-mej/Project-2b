@@ -12,6 +12,7 @@ int main() {
     void printMainMenu(); // prints main menu
     sortingCategories printSortingCategories(); // prints sorting category options
     emissionType printEmissionTypes(); // prints emission types
+    sectorType printSectorTypes(); // prints out all the different sectors
 }
 
 void printMainMenu() {
@@ -47,4 +48,17 @@ emissionType printEmissionTypes() {
     cout << "Enter Choice: ";
     cin >> choice;
     return static_cast<emissionType>(choice);
+}
+
+sectorType printSectorTypes() {
+    int choice;
+    cout << "\nChoose Sector:\n";
+    cout << "[1] Power Industry\n";
+    cout << "[2] Buildings\n";
+    cout << "[3] Transport\n";
+    cout << "[4] Other Industry\n";
+    cout << "[5] Other Sectors\n";
+    cout << "Enter Choice: ";
+    cin >> choice;
+    return static_cast<sectorType>(choice);
 }

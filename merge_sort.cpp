@@ -38,7 +38,7 @@ double categoryValue(const Record& record, const string& category) {
     return 0;
 }
 
-void mergeSort(vector<Record>& emissionData, int left, int right, string category) {
+void mergeSort(vector<Record>& emissionData, int left, int right, string category, bool descending) {
     if (left >= right) { // this means that this section would only have 1 thing or less, so we can stop
         return;
     }
@@ -60,22 +60,36 @@ void mergeSort(vector<Record>& emissionData, int left, int right, string categor
     }
 
     // recursively sort both sides
-    mergeSort(leftSide, 0, leftSide.size() - 1, category);
-    mergeSort(rightSide, 0, rightSide.size() - 1, category);
+    mergeSort(leftSide, 0, leftSide.size() - 1, category, descending);
+    mergeSort(rightSide, 0, rightSide.size() - 1, category, descending);
 
     int leftIndex = 0, rightIndex = 0, mergedIndex = left; // now both halves are sorted, so create indexes to keep track of where we are
 
     if (category != "country") {
         while (leftIndex < leftSide.size() && rightIndex < rightSide.size()) {
-            if (categoryValue(leftSide[leftIndex], category) <= categoryValue(rightSide[rightIndex], category)) { // uses helper to grab values and sees which should come first
-                // if left is smaller
-                emissionData[mergedIndex] = leftSide[leftIndex];
-                leftIndex++;
+            if (descending == false) { // for ascending
+                if (categoryValue(leftSide[leftIndex], category) <= categoryValue(rightSide[rightIndex], category)) { // uses helper to grab values and sees which should come first
+                    // if left is smaller
+                    emissionData[mergedIndex] = leftSide[leftIndex];
+                    leftIndex++;
+                }
+                else {
+                    // if right is smaller
+                    emissionData[mergedIndex] = rightSide[rightIndex];
+                    rightIndex++;
+                }
             }
-            else {
-                // if right is smaller
-                emissionData[mergedIndex] = rightSide[rightIndex];
-                rightIndex++;
+            else { // for descending
+                if (categoryValue(leftSide[leftIndex], category) >= categoryValue(rightSide[rightIndex], category)) { // uses helper to grab values and sees which should come first
+                    // if left is bigger
+                    emissionData[mergedIndex] = leftSide[leftIndex];
+                    leftIndex++;
+                }
+                else {
+                    // if right is bigger
+                    emissionData[mergedIndex] = rightSide[rightIndex];
+                    rightIndex++;
+                }
             }
             mergedIndex++;
         }
@@ -92,13 +106,25 @@ void mergeSort(vector<Record>& emissionData, int left, int right, string categor
     }
     else { // all the same process as before but since country is a string, done separately
         while (leftIndex < leftSide.size() && rightIndex < rightSide.size()) {
-            if (leftSide[leftIndex].country <= rightSide[rightIndex].country) {
-                emissionData[mergedIndex] = leftSide[leftIndex];
-                leftIndex++;
+            if (descending == false) { // for ascending
+                if (leftSide[leftIndex].country <= rightSide[rightIndex].country) {
+                    emissionData[mergedIndex] = leftSide[leftIndex];
+                    leftIndex++;
+                }
+                else {
+                    emissionData[mergedIndex] = rightSide[rightIndex];
+                    rightIndex++;
+                }
             }
-            else {
-                emissionData[mergedIndex] = rightSide[rightIndex];
-                rightIndex++;
+            else { // for descending
+                if (leftSide[leftIndex].country >= rightSide[rightIndex].country) {
+                    emissionData[mergedIndex] = leftSide[leftIndex];
+                    leftIndex++;
+                }
+                else {
+                    emissionData[mergedIndex] = rightSide[rightIndex];
+                    rightIndex++;
+                }
             }
             mergedIndex++;
         }
@@ -118,10 +144,10 @@ void mergeSort(vector<Record>& emissionData, int left, int right, string categor
 }
 
 // helper function that prints out, in order, all of the necessary data i.e. country, year, category in order
-void mergeAndPrint(vector<Record>& emissionData, string category) {
-    mergeSort(emissionData, 0, emissionData.size(), category);
-    cout << i + 1 << ". "; // print out ranking
+void mergeAndPrint(vector<Record>& emissionData, string category, bool descending) {
+    mergeSort(emissionData, 0, emissionData.size(), category, descending);
     for (int i = 0; i < emissionData.size() - 1; i++) {
+        cout << i + 1 << ". "; // print out ranking
         if (category == "country") {
             cout << emissionData[i].country << " - " << emissionData[i].year << endl;
         }

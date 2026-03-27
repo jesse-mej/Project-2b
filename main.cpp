@@ -11,6 +11,7 @@ using namespace std;
 int main() {
     void printMainMenu(); // prints main menu
     sortingCategories printSortingCategories(); // prints sorting category options
+    emissionType printEmissionTypes(); // prints emission types
 }
 
 void printMainMenu() {
@@ -35,4 +36,15 @@ sortingCategories printSortingCategories() {
     cout << "Enter Choice: ";
     cin >> choice;
     return static_cast<sortingCategories>(choice);
+}
+
+emissionType printEmissionTypes() {
+    int choice;
+    cout << "\nChoose Emission Type:\n";
+    cout << "[1] CO2\n";
+    cout << "[2] N2O\n";
+    cout << "[3] CH4\n";
+    cout << "Enter Choice: ";
+    cin >> choice;
+    return static_cast<emissionType>(choice);
 }

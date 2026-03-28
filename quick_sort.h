@@ -11,8 +11,12 @@
 using namespace std;
 
 class quick_sort {
-    void quickSort(vector<Record> &records, int low, int high, string category);
-    int partition(vector<Record> &records, int low, int high, string category);
+private:
+    void quickSort(vector<Record> &records, int low, int high, string category); // Quick Sort Implementation
+    int partition(vector<Record> &records, int low, int high, string category); // Returns partitioning index to quickSort().
+public:
+    void printQuickSort(vector<Record> &records, string category, bool descending); // Sorts and prints vector dataset.
+    void printTopK(vector<Record> &records, string category, bool descending, int num); // Sorts and prints top N records from vector dataset.
 };
 
 

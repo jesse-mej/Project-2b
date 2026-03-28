@@ -59,12 +59,17 @@ int main() {
                 }
                 break;
             }
-            case 2:
-                runMerge(data, selectedCategory, selectedEmission, selectedSector);
+            case 2: {
+                string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
+                mergeAndPrint(data, categoryString, false);
                 break;
-            case 3:
-                runQuick(data, selectedCategory, selectedEmission, selectedSector);
+            }
+            case 3: {
+                string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
+                quick_sort sorter;
+                sorter.printQuickSort(data, categoryString, false);
                 break;
+            }
             case 4:
                 printTopK(data, 10, selectedCategory, selectedEmission, selectedSector);
                 break;
@@ -154,7 +159,7 @@ void printTopK(const vector<Record>& data, int k, sortingCategories category, em
     }
 }
 
-string getCategoryString(sortingCategories category, // convert to string for sorting
+string categoryAsString(sortingCategories category, // convert to string for sorting
                          emissionType emission,
                          sectorType sector) {
 
@@ -178,15 +183,3 @@ string getCategoryString(sortingCategories category, // convert to string for so
     return "year";
 }
 
-void runMerge(vector<Record> &data, sortingCategories category, emissionType emission, sectorType sector) {
-    string categoryString = getCategoryString(category, emission, sector);
-    mergeSort(data, 0, data.size() - 1, categoryString, false);
-    cout << "Merge sort completed\n";
-}
-
-void runQuick(vector<Record> &data, sortingCategories category, emissionType emission, sectorType sector) {
-    string categoryString = getCategoryString(category, emission, sector);
-    quick_sort sorter;
-    sorter.quickSort(data, 0, data.size() - 1, categoryString);
-    cout << "Quick sort completed\n";
-}

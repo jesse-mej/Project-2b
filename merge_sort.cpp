@@ -145,7 +145,7 @@ void mergeSort(vector<Record>& emissionData, int left, int right, string categor
 
 // helper function that prints out, in order, all of the necessary data i.e. country, year, category in order
 void mergeAndPrint(vector<Record>& emissionData, string category, bool descending) {
-    mergeSort(emissionData, 0, emissionData.size(), category, descending);
+    mergeSort(emissionData, 0, emissionData.size() -1, category, descending);
     for (int i = 0; i < emissionData.size() - 1; i++) {
         cout << i + 1 << ". "; // print out ranking
         if (category == "country") {

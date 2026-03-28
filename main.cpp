@@ -15,10 +15,9 @@ void printMainMenu(); // prints main menu
 sortingCategories printSortingCategories(); // prints sorting category options
 emissionType printEmissionTypes(); // prints emission types
 sectorType printSectorTypes(); // prints out all the different sectors
-void printTopK(const vector<Record>& data, int k, sortingCategories category, emissionType emission, sectorType sector);
+void printTopK_M(const vector<Record>& data, int k, sortingCategories category, emissionType emission, sectorType sector);
 string categoryAsString(sortingCategories category, emissionType emission, sectorType sector);
-void runMerge(vector<Record>& data, sortingCategories category, emissionType emission, sectorType sector);
-void runQuick(vector<Record>& data, sortingCategories category,emissionType emission, sectorType sector);
+bool quickSort = false;
 
 int main() {
     vector<Record> data; // stores the dataset
@@ -61,17 +60,25 @@ int main() {
             }
             case 2: { // call merge sort function
                 string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
-                mergeAndPrint(data, categoryString, false);
+                mergeAndPrint(data, categoryString, true);
                 break;
             }
             case 3: { // call quick sort function
                 string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
                 quick_sort sorter;
-                sorter.printQuickSort(data, categoryString, false);
+                sorter.printQuickSort(data, categoryString, true);
+                quickSort = true;
                 break;
             }
             case 4: // call print top k function
-                printTopK(data, 10, selectedCategory, selectedEmission, selectedSector);
+                if (quickSort == true) {
+                    string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
+                    quick_sort sorter;
+                    sorter.printTopK(data, categoryString, true, 10);
+                }
+                else {
+                    printTopK_M(data, 10, selectedCategory, selectedEmission, selectedSector);
+                }
                 break;
             case 5: // exiting the program
                 cout << "Exiting the program.\n";
@@ -132,28 +139,28 @@ sectorType printSectorTypes() {
     return static_cast<sectorType>(choice);
 }
 
-void printTopK(const vector<Record>& data, int k, sortingCategories category, emissionType emission, sectorType sector) { // prints the top 10 elements from the sorted data
+void printTopK_M(const vector<Record>& data, int k, sortingCategories category, emissionType emission, sectorType sector) { // prints the top 10 elements from the sorted data
     cout << "\nShowing first: " << k << " records\n";
     for (int i = 0; i < k && i < static_cast<int>(data.size()); i++) { // loop through
         cout << i + 1 << ". " << data[i].country << " | ";
 
         if (category == sortingCategories::EMISSION_TYPE) {
-            if (emission == emissionType::CO2) cout << "CO2: " << data[i].co2;
-            else if (emission == emissionType::N2O) cout << "N2O: " << data[i].n2o;
-            else cout << "CH4: " << data[i].ch4;
+            if (emission == emissionType::CO2) cout << data[i].year << " | " << "CO2: " << data[i].co2;
+            else if (emission == emissionType::N2O) cout << data[i].year << " | " << "N2O: " << data[i].n2o;
+            else cout << data[i].year << " | " << "CH4: " << data[i].ch4;
         }
         else if (category == sortingCategories::YEAR) {
             cout << "Year: " << data[i].year;
         }
         else if (category == sortingCategories::COUNTRY) {
-            cout << "Country: " << data[i].country;
+            cout << data[i].year << " | " << "Country: " << data[i].country;
         }
         else if (category == sortingCategories::SECTOR) {
-            if (sector == sectorType::POWER_INDUSTRY) cout << "Power: " << data[i].powerIndustry;
-            else if (sector == sectorType::BUILDINGS) cout << "Buildings: " << data[i].buildings;
-            else if (sector == sectorType::TRANSPORT) cout << "Transport: " << data[i].transport;
-            else if (sector == sectorType::OTHER_INDUSTRY) cout << "Other Industry: " << data[i].otherIndustry;
-            else cout << "Other Sector: " << data[i].otherSector;
+            if (sector == sectorType::POWER_INDUSTRY) cout << data[i].year << " | " << "Power: " << data[i].powerIndustry;
+            else if (sector == sectorType::BUILDINGS) cout << data[i].year << " | " << "Buildings: " << data[i].buildings;
+            else if (sector == sectorType::TRANSPORT) cout << data[i].year << " | " << "Transport: " << data[i].transport;
+            else if (sector == sectorType::OTHER_INDUSTRY) cout << data[i].year << " | " << "Other Industry: " << data[i].otherIndustry;
+            else cout << data[i].year << " | " << "Other Sector: " << data[i].otherSector;
         }
         cout << endl;
     }

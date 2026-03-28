@@ -25,7 +25,64 @@ int main() {
     cout << "Records: " << data.size() << "\n";
 
     int choice;
+    do {
+        printMainMenu();
+        cin >> choice;
 
+        switch (choice) {
+            case 1: {
+                sortingCategories category = printSortingCategories();
+                if (category == sortingCategories::EMISSION_TYPE) {
+                    emissionType emission = printEmissionTypes();
+                    cout << "Selected: Emission Type\n";
+                    if (emission == emissionType::CO2) {
+                        cout << "CO2 selected.\n";
+                    }
+                    else if (emission == emissionType::N2O) {
+                        cout << "N2O selected.\n";
+                    }
+                    else if (emission == emissionType::CH4) {
+                        cout << "CH4 selected.\n";
+                    }
+                }
+                else if (category == sortingCategories::YEAR) {
+                    cout << "Selected: Year\n";
+                }
+                else if (category == sortingCategories::COUNTRY) {
+                    cout << "Selected: Country\n";
+                }
+                else if (category == sortingCategories::SECTOR) {
+                    sectorType sector = printSectorTypes();
+                    cout << "Selected: Sector\n";
+                    if (sector == sectorType::POWER_INDUSTRY) {
+                        cout << "Power industry selected.\n";
+                    }
+                    else if (sector == sectorType::BUILDINGS) {
+                        cout << "Buildings selected.\n";
+                    }
+                    else if (sector == sectorType::TRANSPORT) {
+                        cout << "Transport selected.\n";
+                    }
+                    else if (sector == sectorType::OTHER_INDUSTRY) {
+                        cout << "Other industry selected.\n";
+                    }
+                    else if (sector == sectorType::OTHER_SECTOR) {
+                        cout << "Other Sector selected.\n";
+                    }
+                }
+                break;
+            }
+            case 2:
+                cout << "Waiting to implement merge sort\n";
+
+            case 3:
+                cout << "Waiting to implement quick sort\n";
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+    } while (choice != 5);
+
+    return 0;
 }
 
 void printMainMenu() {

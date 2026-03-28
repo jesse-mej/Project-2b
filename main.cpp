@@ -12,6 +12,7 @@ void printMainMenu(); // prints main menu
 sortingCategories printSortingCategories(); // prints sorting category options
 emissionType printEmissionTypes(); // prints emission types
 sectorType printSectorTypes(); // prints out all the different sectors
+void printTopK(const vector<Record>& data, int k);
 
 int main() {
     vector<Record> data; // stores the dataset
@@ -31,11 +32,11 @@ int main() {
 
         switch (choice) {
             case 1: {
-                sortingCategories category = printSortingCategories();
+                sortingCategories category = printSortingCategories(); // prints sorting categories
                 if (category == sortingCategories::EMISSION_TYPE) {
-                    emissionType emission = printEmissionTypes();
+                    emissionType emission = printEmissionTypes(); // prints emission types if selected
                     cout << "Selected: Emission Type\n";
-                    if (emission == emissionType::CO2) {
+                    if (emission == emissionType::CO2) { // print out nicely
                         cout << "CO2 selected.\n";
                     }
                     else if (emission == emissionType::N2O) {
@@ -45,14 +46,14 @@ int main() {
                         cout << "CH4 selected.\n";
                     }
                 }
-                else if (category == sortingCategories::YEAR) {
+                else if (category == sortingCategories::YEAR) { // same for year
                     cout << "Selected: Year\n";
                 }
-                else if (category == sortingCategories::COUNTRY) {
+                else if (category == sortingCategories::COUNTRY) { // same for country
                     cout << "Selected: Country\n";
                 }
                 else if (category == sortingCategories::SECTOR) {
-                    sectorType sector = printSectorTypes();
+                    sectorType sector = printSectorTypes(); // print out sector categories
                     cout << "Selected: Sector\n";
                     if (sector == sectorType::POWER_INDUSTRY) {
                         cout << "Power industry selected.\n";
@@ -73,10 +74,17 @@ int main() {
                 break;
             }
             case 2:
-                cout << "Waiting to implement merge sort\n";
-
+                cout << "Waiting to implement merge sort\n"; // placeholder for now
+                break;
             case 3:
-                cout << "Waiting to implement quick sort\n";
+                cout << "Waiting to implement quick sort\n"; // placeholder for now
+                break;
+            case 4:
+                printTopK(data, 10);
+                break;
+            case 5:
+                cout << "Exiting the program.\n";
+                break;
             default:
                 cout << "Invalid choice. Try again.\n";
         }
@@ -131,4 +139,16 @@ sectorType printSectorTypes() {
     cout << "Enter Choice: ";
     cin >> choice;
     return static_cast<sectorType>(choice);
+}
+
+void printTopK(const vector<Record>& data, int k) { // prints the top 10 elements from the sorted data
+    cout << "\nShowing first: " << k << " records\n";
+    for (int i = 0; i < k && i < static_cast<int>(data.size()); i++) { // loop through
+        cout << i + 1 << ". "
+        << data[i].country << " | " // print it out in a readable way
+        << data[i].year << " | "
+        << "CO2: " << data[i].co2 << " | "
+        << "N2O: " << data[i].n2o << " | "
+        << "CH4: " << data[i].ch4 << "\n";
+    }
 }

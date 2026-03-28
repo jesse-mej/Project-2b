@@ -160,3 +160,4 @@ void mergeAndPrint(vector<Record>& emissionData, string category, bool descendin
         }
     }
 }
+

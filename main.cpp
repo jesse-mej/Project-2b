@@ -59,24 +59,24 @@ int main() {
                 }
                 break;
             }
-            case 2: {
+            case 2: { // call merge sort function
                 string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
                 mergeAndPrint(data, categoryString, false);
                 break;
             }
-            case 3: {
+            case 3: { // call quick sort function
                 string categoryString = categoryAsString(selectedCategory, selectedEmission, selectedSector);
                 quick_sort sorter;
                 sorter.printQuickSort(data, categoryString, false);
                 break;
             }
-            case 4:
+            case 4: // call print top k function
                 printTopK(data, 10, selectedCategory, selectedEmission, selectedSector);
                 break;
-            case 5:
+            case 5: // exiting the program
                 cout << "Exiting the program.\n";
                 break;
-            default:
+            default: // did not enter a valid choice
                 cout << "Invalid choice. Try again.\n";
         }
     } while (choice != 5);

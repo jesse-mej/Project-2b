@@ -151,6 +151,9 @@ void mergeAndPrint(vector<Record>& emissionData, string category, bool descendin
         if (category == "country") {
             cout << emissionData[i].country << " - " << emissionData[i].year << endl;
         }
+        else if (category == "year") {
+            cout << emissionData[i].country << " - " << emissionData[i].year << endl;
+        }
         else {
             // print out country - year - category value for these rankings
             cout << emissionData[i].country << " - " << emissionData[i].year << " - " << categoryValue(emissionData[i], category) << endl;

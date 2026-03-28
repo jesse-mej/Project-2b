@@ -133,8 +133,8 @@ void quick_sort::printQuickSort(vector<Record> &records, string category, bool d
             if (category == "country" || category == "year") {
                 // Sort by country or year.
                 // Country | Year | CO2 | N2O | CH4
-                cout << record.country << " | " << record.year << " | ";
-                cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
+                cout << record.country << " | " << record.year << endl;
+                //cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
             }
             else {
                 // Sort by specific emission.
@@ -152,8 +152,8 @@ void quick_sort::printQuickSort(vector<Record> &records, string category, bool d
             if (category == "country" || category == "year") {
                 // Sort by country or year.
                 // Country | Year | CO2 | N2O | CH4
-                cout << record.country << " | " << record.year << " | ";
-                cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
+                cout << record.country << " | " << record.year << endl;
+                //cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
             }
             else {
                 // Sort by specific emission.
@@ -184,7 +184,7 @@ void quick_sort::printTopK(vector<Record> &records, string category, bool descen
                 // Sort by country or year.
                 // Country | Year | CO2 | N2O | CH4
                 cout << record.country << " | " << record.year << " | ";
-                cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
+                //cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
             }
             else {
                 // Sort by specific emission.
@@ -208,7 +208,7 @@ void quick_sort::printTopK(vector<Record> &records, string category, bool descen
                 // Sort by country or year.
                 // Country | Year | CO2 | N2O | CH4
                 cout << record.country << " | " << record.year << " | ";
-                cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
+                //cout << "CO2: " << record.co2 << " | " << "N2O: " << record.n2o << " | " << "CH4: " << record.ch4 << endl;
             }
             else {
                 // Sort by specific emission.

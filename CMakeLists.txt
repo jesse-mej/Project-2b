@@ -3,4 +3,7 @@ project(Project-2b)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Project-2b main.cpp)
+add_executable(Project-2b
+        main.cpp
+        load_csv.cpp
+    )
